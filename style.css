@@ -1,0 +1,83 @@
+    /* Style for the entire body */
+    body {
+        font-family: Arial, sans-serif;
+        /* Default font */
+        color: #333;
+        /* Default text color */
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Style for the main container */
+    .container {
+        text-align: center;
+        margin-top: 20px;
+    }
+    p {
+        font-family: 'Helvetica', sans-serif;
+        /* Font size for the header */
+        color: black;
+        /* Text color */
+        margin-bottom: 20px;
+    }
+
+    /* Style for the header (h1) */
+    h1 {
+        font-family: 'Helvetica', sans-serif;
+        /* Use Helvetica with fallback to sans-serif */
+        font-size: 45px;
+        /* Font size for the header */
+        font-weight: bold;
+        /* Make the font bold */
+        color: black;
+        /* Text color */
+        margin-bottom: 20px;
+    }
+
+
+
+    /* Style for the report section */
+    .report {
+        text-align: center;
+        border: 5px solid green;
+        padding: 15px;
+        background-color: #f9f9f9;
+        /* Light gray background */
+        color: #1d3557;
+        /* Dark navy text color */
+        font-family: 'Courier New', monospace;
+        /* Monospaced font for reports */
+        font-size: 18px;
+        /* Font size for report content */
+    }
+
+    /* Style for the location text */
+    #location {
+        font-size: 16px;
+        color: #e63946;
+        /* Red color for location text */
+    }
+
+    /* Style for the label and input fields */
+
+    input[type="file"] {
+        font-size: 14px;
+        margin: 5px 0;
+    }
+
+    input[type="submit"] {
+        font-size: 16px;
+        background-color: #1d3557;
+        /* Navy background for the button */
+        color: #fff;
+        /* White text */
+        padding: 10px 15px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #457b9d;
+        /* Lighter blue on hover */
+    }
