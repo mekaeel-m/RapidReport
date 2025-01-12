@@ -9,9 +9,8 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
   const [image, setImage] = useState<string | null>(null);
   const [problem, setProblem] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false);  // State to track loading
+  const [loading, setLoading] = useState<boolean>(false);
 
-  // Function to fetch the user's location
   const fetchLocation = () => {
     if (!("geolocation" in navigator)) {
       setError("Geolocation is not supported by your browser.");
@@ -43,12 +42,10 @@ export default function Home() {
     );
   };
 
-  // Fetch the location on load
   useEffect(() => {
     fetchLocation();
   }, []);
 
-  // Handle image upload
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -60,7 +57,6 @@ export default function Home() {
     }
   };
 
-  // Handle form submission
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
@@ -69,7 +65,7 @@ export default function Home() {
       return;
     }
 
-    setLoading(true); // Set loading to true when API calls start
+    setLoading(true);
 
     try {
       const response = await processSubmission({
@@ -78,13 +74,12 @@ export default function Home() {
         longitude,
       });
 
-      // Mock email result (you can replace this with actual sending logic)
       console.log("Generated Email:", response);
       alert(`Email Subject: ${response.subject}\nEmail Body: ${response.body}`);
     } catch (error) {
       setError("There was an error submitting your report.");
     } finally {
-      setLoading(false);  // Set loading to false once API calls are done
+      setLoading(false);
     }
   };
 
@@ -107,7 +102,7 @@ export default function Home() {
             onChange={(e) => setProblem(e.target.value)}
             className="w-full max-w-md p-3 border border-gray-600 rounded-md bg-slate-700 text-white resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
             rows={3}
-            disabled={loading} // Disable the textarea during loading
+            disabled={loading}
           />
 
           {/* Latitude and Longitude Fields */}
@@ -123,7 +118,7 @@ export default function Home() {
                 onChange={(e) => setLatitude(e.target.value)}
                 placeholder="Enter Latitude"
                 className="w-full max-w-md p-3 border border-gray-600 rounded-md bg-slate-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                disabled={loading} // Disable input during loading
+                disabled={loading}
               />
             </div>
             <div>
@@ -137,7 +132,7 @@ export default function Home() {
                 onChange={(e) => setLongitude(e.target.value)}
                 placeholder="Enter Longitude"
                 className="w-full max-w-md p-3 border border-gray-600 rounded-md bg-slate-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                disabled={loading} // Disable input during loading
+                disabled={loading}
               />
             </div>
             {error && (
@@ -148,7 +143,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Right Column: Image Upload */}
         <div className="lg:w-1/3 flex flex-col items-center space-y-4 mt-8 lg:mt-0">
           {/* Image Preview */}
           {image ? (
@@ -176,14 +170,14 @@ export default function Home() {
             accept="image/*"
             className="hidden"
             onChange={handleImageUpload}
-            disabled={loading} // Disable the upload button during loading
+            disabled={loading}
           />
 
           {/* Submit Button */}
           <button
             onClick={handleSubmit}
             className="mt-4 px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-green-400"
-            disabled={loading} // Disable the submit button during loading
+            disabled={loading}
           >
             {loading ? "Submitting..." : "Submit Report"}
           </button>

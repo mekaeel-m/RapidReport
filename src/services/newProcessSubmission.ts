@@ -43,7 +43,6 @@ export async function processSubmission({problem, latitude, longitude}: Submissi
 
 async function getAddressData(latitude: string, longitude: string): Promise<{ address?: string, error?: string }> {
   const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_API}`
-  console.log(url);
   try {
     const response = await axios.get(url)
     const results = response.data.results;
@@ -101,18 +100,18 @@ async function getBusinessData(address: string): Promise<Business> {
   };
 
   try {
-    const responseName = await axios.post("https://api.perplexity.ai/chat/completions", payloadName, { headers })
-    const responseEmail = await axios.post("https://api.perplexity.ai/chat/completions", payloadEmail, { headers })
-    console.log(responseName)
-    console.log(responseEmail)
+    // const responseName = await axios.post("https://api.perplexity.ai/chat/completions", payloadName, { headers })
+    // const responseEmail = await axios.post("https://api.perplexity.ai/chat/completions", payloadEmail, { headers })
+    // console.log(responseName)
+    // console.log(responseEmail)
 
-    const businessName = responseName?.data?.choices?.[0]?.messages?.content || "No business name found"
-    const businessEmail = responseEmail?.data?.choices?.[0]?.messages?.content || "No business email found"
+    // const businessName = responseName?.data?.choices?.[0]?.messages?.content || "No business name found"
+    // const businessEmail = responseEmail?.data?.choices?.[0]?.messages?.content || "No business email found"
     
     return { 
-      name: businessName,
+      name: "Example Business",
       address: address,
-      email: businessEmail
+      email: "example@domain.xyz"
     }
   } catch (error) {
     console.error("Failed to get the business data", error)
