@@ -105,8 +105,8 @@ async function getBusinessData(address: string): Promise<Business> {
     // console.log(responseName)
     // console.log(responseEmail)
 
-    // const businessName = responseName?.data?.choices?.[0]?.messages?.content || "No business name found"
-    // const businessEmail = responseEmail?.data?.choices?.[0]?.messages?.content || "No business email found"
+    // const businessName = responseName?.data?.choices?.[0]?.message?.content || "No business name found"
+    // const businessEmail = responseEmail?.data?.choices?.[0]?.message?.content || "No business email found"
     
     return { 
       name: "Example Business",
