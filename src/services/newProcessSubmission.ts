@@ -100,18 +100,36 @@ async function getBusinessData(address: string): Promise<Business> {
   };
 
   try {
-    // const responseName = await axios.post("https://api.perplexity.ai/chat/completions", payloadName, { headers })
-    // const responseEmail = await axios.post("https://api.perplexity.ai/chat/completions", payloadEmail, { headers })
-    // console.log(responseName)
-    // console.log(responseEmail)
+    const optionsName = {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_PERPLEXITY_CLIENT_API}`,
+        'Content-Type': 'application/json'
+      },
+      body: `{"model":"llama-3.1-sonar-large-128k-online","return_images":false,"return_related_questions":false,"stream":false,"temperature":0,"messages":[{"role":"user","content":"Please give me a string with JUST the name of the business currently located at the given address in the response to this input without citations: ${address}"}]}`
+    };
 
-    // const businessName = responseName?.data?.choices?.[0]?.message?.content || "No business name found"
-    // const businessEmail = responseEmail?.data?.choices?.[0]?.message?.content || "No business email found"
+    const optionsEmail = {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_PERPLEXITY_CLIENT_API}`,
+        'Content-Type': 'application/json'
+      },
+      body: `{"model":"llama-3.1-sonar-large-128k-online","return_images":false,"return_related_questions":false,"stream":false,"temperature":0,"messages":[{"role":"user","content":"Please give me a string with JUST the email of the business currently located at the given address in the response to this input without citations: ${address}"}]}`
+    };
+  
+    const responseName = await fetch('https://api.perplexity.ai/chat/completions', optionsName)
+    const responseJSONName = await responseName.json()
+    const businessName = responseJSONName.choices[0].message.content.length > 35 ? "City of Hamilton" : responseJSONName.choices[0].message.content
+
+    const responseEmail = await fetch('https://api.perplexity.ai/chat/completions', optionsEmail)
+    const responseJSONEmail = await responseEmail.json()
+    const businessEmail = responseJSONEmail.choices[0].message.content.length > 320 ? "publichealth@hamilton.ca" : responseJSONEmail.choices[0].message.content
     
     return { 
-      name: "Example Business",
+      name: businessName,
       address: address,
-      email: "example@domain.xyz"
+      email: businessEmail
     }
   } catch (error) {
     console.error("Failed to get the business data", error)
